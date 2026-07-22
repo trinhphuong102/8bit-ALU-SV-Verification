@@ -87,6 +87,7 @@ To ensure 100% functional correctness, an automated verification pipeline was de
        |
        v
 [MATLAB Script] --(Compares)--> alu_output.txt vs alu_gold.txt --> [PASS/FAIL]
+```
 
 **Verification Coverage:**
 - **Total Test Vectors:** 786,432 combinations (exhaustive testing across all opcodes and operands).
