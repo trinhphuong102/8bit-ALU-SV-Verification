@@ -2,16 +2,12 @@
 
 module tb_ALU_8bit;
 
-reg clk;
-reg EN;
-reg [3:0] op_code;
-reg [7:0] A;
-reg [7:0] B;
+logic clk , EN;
+logic [3:0] op_code;
+logic [7:0] A, B;
 
 wire [15:0] result;
-wire carry_flag;
-wire zero_flag;
-wire overflow_flag;
+logic carry_flag, zero_flag, overflow_flag;
 
 integer f_in;
 integer f_out;
