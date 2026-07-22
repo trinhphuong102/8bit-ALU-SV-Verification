@@ -180,7 +180,7 @@ The synthesized ALU utilizes dedicated hardware DSP blocks for multiplication, h
 ---
 
 ## 7. Project Structure
-
+```text
 8bit-ALU-SV-Verification/
 │
 ├── README.md
@@ -208,11 +208,7 @@ The synthesized ALU utilizes dedicated hardware DSP blocks for multiplication, h
 │   ├── compile.do
 │   ├── wave.do
 │   └── run.do
-│
-├── alu_input.txt
-├── alu_gold.txt
-└── alu_output.txt 
-
+```
 ---
 
 ## 8. Conclusion
