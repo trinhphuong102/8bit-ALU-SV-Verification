@@ -6,7 +6,7 @@ logic clk , EN;
 logic [3:0] op_code;
 logic [7:0] A, B;
 
-wire [15:0] result;
+logic [15:0] result;
 logic carry_flag, zero_flag, overflow_flag;
 
 integer f_in;

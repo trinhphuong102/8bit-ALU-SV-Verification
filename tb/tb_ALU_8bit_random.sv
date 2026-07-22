@@ -2,16 +2,12 @@
 
 module tb_ALU_8bit_random;
 
-reg clk;
-reg EN;
-reg [3:0] op_code;
-reg [7:0] A;
-reg [7:0] B;
+logic clk , EN;
+logic [3:0] op_code;
+logic [7:0] A, B;
 
-wire [15:0] result;
-wire carry_flag;
-wire zero_flag;
-wire overflow_flag;
+logic [15:0] result;
+logic carry_flag, zero_flag, overflow_flag;;
 
 integer i, j;
 
