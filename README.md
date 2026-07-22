@@ -71,38 +71,83 @@ A higher resolution version of the schematic is also provided:
 
 ## 4. Verification & Simulation
 
-**Tools:** MATLAB, ModelSim, SystemVerilog
+**Tools:** MATLAB, ModelSim, Verilog HDL, SystemVerilog
 
-To ensure 100% functional correctness, an automated verification pipeline was developed. This flow utilizes a MATLAB Golden Model to generate exhaustive test vectors and a SystemVerilog File I/O testbench for hardware simulation.
+To verify the RTL design, an automated verification flow was developed using a MATLAB Golden Model together with a SystemVerilog File I/O testbench. MATLAB is responsible for generating exhaustive test vectors and the corresponding Golden Model results, while the SystemVerilog testbench applies these vectors to the DUT and records the RTL outputs for comparison.
 
 ```text
-[MATLAB Script] --(Generates)--> alu_input.txt & alu_gold.txt
-       |
-       v
-[SystemVerilog TB] --(Reads)--> alu_input.txt
-       |
-       +---> Drives Signals ---> [ALU RTL (DUT)]
-       |
-       +---> Logs Results  ---> alu_output.txt
-       |
-       v
-[MATLAB Script] --(Compares)--> alu_output.txt vs alu_gold.txt --> [PASS/FAIL]
+                 MATLAB
+        +---------------------+
+        | gen_ALU_vectors.m   |
+        +----------+----------+
+                   |
+      +------------+-------------+
+      |                          |
+      v                          v
+ alu_input.txt             alu_gold.txt
+      |
+      v
++---------------------------+
+| SystemVerilog Testbench   |
+| (File I/O)                |
++-------------+-------------+
+              |
+              v
+        ALU RTL (DUT)
+              |
+              v
+      alu_output.txt
+              |
+              v
+      +------------------+
+      | verify_ALU.m     |
+      +--------+---------+
+               |
+               v
+      PASS / FAIL Report
 ```
 
-**Verification Coverage:**
-- **Total Test Vectors:** 786,432 combinations (exhaustive testing across all opcodes and operands).
-- **Automation:** ModelSim execution is fully automated via Tcl/DO scripts.
-- **Result:** The RTL perfectly matches the Golden Model across all 786,432 test cases.
+### Verification Flow
 
-Automated Checking Result (MATLAB):
+1. **Generate Test Vectors**
+   - `gen_ALU_vectors.m` exhaustively generates every possible combination of inputs for all supported ALU operations.
+   - Two files are produced:
+     - `alu_input.txt` containing the input vectors.
+     - `alu_gold.txt` containing the expected (Golden Model) results.
+
+2. **RTL Simulation**
+   - The SystemVerilog testbench (`tb_ALU_8bit.sv`) reads `alu_input.txt` using File I/O (`$fopen`, `$fscanf`).
+   - Each test vector is applied to the ALU RTL at the rising edge of the clock.
+   - The RTL outputs are written to `alu_output.txt` using `$fwrite`.
+
+3. **Automatic Result Checking**
+   - `verify_ALU.m` compares `alu_output.txt` against `alu_gold.txt`.
+   - Every mismatch is reported automatically.
+   - If no mismatch is detected, the RTL is considered functionally correct.
+
+### Verification Coverage
+
+- **Operations Tested:** 12 ALU operations
+- **Operand Range:** A = 0–255, B = 0–255
+- **Total Test Vectors:** **786,432**
+- **Verification Method:** Exhaustive verification using MATLAB Golden Model
+- **Simulation:** ModelSim with SystemVerilog File I/O
+
+### Verification Result
+
+```
 ========================================
 ALU Verification PASSED
 786432 / 786432 vectors matched
 Functional correctness = 100%
 ========================================
+```
+
+The RTL implementation successfully matched the MATLAB Golden Model for all **786,432** test vectors, confirming the functional correctness of the ALU design.
 
 ![Simulation Waveform](docs/waveform.png)
 
+The waveform confirms the correct execution of all ALU operations. Input operands (`A`, `B`) and `op_code` change synchronously with the clock, while the output `result` and status flags (`carry_flag`, `zero_flag`, and `overflow_flag`) are updated correctly after each rising clock edge.
 ---
 
 ## 5. Synthesis & Static Timing Analysis (STA)
