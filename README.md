@@ -182,26 +182,36 @@ The synthesized ALU utilizes dedicated hardware DSP blocks for multiplication, h
 ## 7. Project Structure
 
 8bit-ALU-SV-Verification/
-├── .gitignore                 
-├── README.md                  
-├── docs/                      
-│   ├── resource.png           
-│   ├── schematic_high_res.pdf 
-│   ├── schematic.png 
-│   ├── setup_time.png         
-│   └── waveform.png           
-├── matlab/                    
-│   ├── gen_ALU_vectors.m      
-│   └── verify_ALU.m           
-├── rtl/                       
-│   └── ALU_8bit.v             
-├── sim/                       
-│   ├── compile.do 
-│   ├── wave.do 
-│   └── run.do                 
-└── tb/                        
-    ├── tb_ALU_8bit.sv         
-    └── tb_ALU_8bit_random.v   
+│
+├── README.md
+├── .gitignore
+│
+├── docs/
+│   ├── schematic.png
+│   ├── schematic_high_res.pdf
+│   ├── waveform.png
+│   ├── setup_time.png
+│   └── resource.png
+│
+├── rtl/
+│   └── ALU_8bit.v
+│
+├── tb/
+│   ├── tb_ALU_8bit.sv
+│   └── tb_ALU_8bit_random.v
+│
+├── matlab/
+│   ├── gen_ALU_vectors.m
+│   └── verify_ALU.m
+│
+├── sim/
+│   ├── compile.do
+│   ├── wave.do
+│   └── run.do
+│
+├── alu_input.txt
+├── alu_gold.txt
+└── alu_output.txt 
 
 ---
 
