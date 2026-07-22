@@ -1,0 +1,14 @@
+
+transcript
+*.wlf
+wlft*
+*.vstf
+*.do.bak
+
+alu_input.txt
+alu_gold.txt
+alu_output.txt
+matlab/*.txt
+
+.DS_Store
+Thumbs.db
