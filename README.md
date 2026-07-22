@@ -148,7 +148,6 @@ The RTL implementation successfully matched the MATLAB Golden Model for all **78
 ![Simulation Waveform](docs/waveform.png)
 
 The waveform confirms the correct execution of all ALU operations. Input operands (`A`, `B`) and `op_code` change synchronously with the clock, while the output `result` and status flags (`carry_flag`, `zero_flag`, and `overflow_flag`) are updated correctly after each rising clock edge.
----
 
 ## 5. Synthesis & Static Timing Analysis (STA)
 
