@@ -75,6 +75,7 @@ A higher resolution version of the schematic is also provided:
 
 To ensure 100% functional correctness, an automated verification pipeline was developed. This flow utilizes a MATLAB Golden Model to generate exhaustive test vectors and a SystemVerilog File I/O testbench for hardware simulation.
 
+```text
 [MATLAB Script] --(Generates)--> alu_input.txt & alu_gold.txt
        |
        v
@@ -91,6 +92,13 @@ To ensure 100% functional correctness, an automated verification pipeline was de
 - **Total Test Vectors:** 786,432 combinations (exhaustive testing across all opcodes and operands).
 - **Automation:** ModelSim execution is fully automated via Tcl/DO scripts.
 - **Result:** The RTL perfectly matches the Golden Model across all 786,432 test cases.
+
+Automated Checking Result (MATLAB):
+========================================
+ALU Verification PASSED
+786432 / 786432 vectors matched
+Functional correctness = 100%
+========================================
 
 ![Simulation Waveform](docs/waveform.png)
 
